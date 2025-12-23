@@ -1,22 +1,29 @@
-<button onclick="testCamera()">Test Camera</button>
-<button onclick="testMicrophone()">Test Microphone</button>
+<h3>Local / Session Storage Test</h3>
+<button onclick="checkLocalStorage()">Check localStorage</button>
+<button onclick="checkSessionStorage()">Check sessionStorage</button>
 
 <script>
-async function testCamera() {
+function checkLocalStorage() {
   try {
-    await navigator.mediaDevices.getUserMedia({ video: true });
-    alert("Camera access granted!");
+    if (localStorage.length === 0) {
+      alert("localStorage is empty or inaccessible");
+    } else {
+      alert("localStorage contents:\n" + JSON.stringify(localStorage));
+    }
   } catch (e) {
-    alert("Camera access blocked / denied: " + e.message);
+    alert("Cannot access localStorage:\n" + e.message);
   }
 }
 
-async function testMicrophone() {
+function checkSessionStorage() {
   try {
-    await navigator.mediaDevices.getUserMedia({ audio: true });
-    alert("Microphone access granted!");
+    if (sessionStorage.length === 0) {
+      alert("sessionStorage is empty or inaccessible");
+    } else {
+      alert("sessionStorage contents:\n" + JSON.stringify(sessionStorage));
+    }
   } catch (e) {
-    alert("Microphone access blocked / denied: " + e.message);
+    alert("Cannot access sessionStorage:\n" + e.message);
   }
 }
 </script>
